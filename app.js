@@ -5,7 +5,7 @@ electron.app.on('ready', function(){
         webPreferences: {
             nodeIntegration: true
         },
-        width:800,
+        width:1000,
         height:700})
     mainWindow.loadURL(`file://${__dirname}/index.html`)
 })
