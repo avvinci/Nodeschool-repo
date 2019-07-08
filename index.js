@@ -1,6 +1,9 @@
 function saveFn(){
-    let quote = document.getElementById('quoteTA').value ; 
-    let author = document.getElementById('authorTA').value ; 
+    let quoteTA =  document.getElementById('quoteTA') ; 
+    let authorTA =  document.getElementById('authorTA') ; 
+    let quote = quoteTA.value ; 
+    let author = authorTA.value ;
+
     console.log(quote); 
     console.log(author); 
 
@@ -20,7 +23,16 @@ function saveFn(){
         .then(() => {
             console.log('...Done');
         });
-        
+    
+    authorTA.value = '' ;
+    markDone() ; 
+    quoteTA.value = '' ;
+}
+
+function markDone(){
+    const notifier = require('node-notifier');
+    // String
+    notifier.notify('Quotes Added');
 }
 
 function viewFn(){
