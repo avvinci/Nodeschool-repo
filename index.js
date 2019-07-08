@@ -1,13 +1,9 @@
 function saveFn(){
     
-    let q = document.getElementById('quoteTA') ; 
-    let a = document.getElementById('authorTA') ; 
-    console.log(q.value); 
-    let content  = q.value
-    console.log(a); 
-    var fs = require('fs');
-    try { fs.writeFileSync('myfile.txt', content, 'utf-8'); }
-    catch(e) { alert('Failed to save the file !'); }
+    let quote = document.getElementById('quoteTA').value ; 
+    let author = document.getElementById('authorTA').value ; 
+    console.log(quote); 
+    console.log(author); 
 
     const createCsvWriter = require('csv-writer').createObjectCsvWriter;
     const csvWriter = createCsvWriter({
@@ -15,24 +11,18 @@ function saveFn(){
         header: [
             {id: 'quote', title: 'QUOTE'},
             {id: 'author', title: 'AUTHOR'}
-        ]
+        ],
+        append: true
     });
     
-    const records = [
-        {quote: 'A journey begins',  author: 'avvinci'},
-        {quote: 'Perfect is the enemy of good',  author: 'Anne'},
-
-    ];
+    const records = [ {quote, author} ];
     
     csvWriter.writeRecords(records)       // returns a promise
         .then(() => {
             console.log('...Done');
         });
         
-
-
 }
 
 let b = document.getElementById('addButton') ; 
-
 b.addEventListener('click', saveFn); 
