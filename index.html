@@ -4,26 +4,22 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <body>
     <h3>Quote Nation</h3>
+    <button  type="button" class="btn btn-success btn-block mb-5 mt-5 "   id ="viewButton"> View Quotes </button>
+
     <div class="form-group">
-        Quote <br />
+        Quote 
           <div class="mb-3">
             <textarea class="form-control" id="quoteTA" placeholder="Add Quote"  ></textarea>
           </div>
-        <!-- <textarea id="quoteTA"> </textarea> -->
-        <br />
         Author 
-        <br />
-        
         <textarea  class="form-control" id="authorTA"> </textarea>
         <button  type="button" class="btn btn-primary btn-block mt-3 "   id ="addButton"> Add </button>
     </div>
     <script>
         document.addEventListener("keydown", function (e) {
-          if (e.which === 123) {
-            require('remote').getCurrentWindow().toggleDevTools();
-          } else if (e.which === 116) {
-            location.reload();
-          }
+          if (e.which === 116) {
+                location.reload();
+              }
         });
       </script>
 

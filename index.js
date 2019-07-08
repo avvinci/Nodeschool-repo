@@ -1,5 +1,4 @@
 function saveFn(){
-    
     let quote = document.getElementById('quoteTA').value ; 
     let author = document.getElementById('authorTA').value ; 
     console.log(quote); 
@@ -24,5 +23,21 @@ function saveFn(){
         
 }
 
-let b = document.getElementById('addButton') ; 
-b.addEventListener('click', saveFn); 
+function viewFn(){
+
+    const csvFilePath='./quotes.csv'
+    const csv=require('csvtojson')
+    csv()
+    .fromFile(csvFilePath)
+    .then((jsonObj)=>{
+        console.log(jsonObj);
+    
+    })
+ 
+}
+
+let addButton = document.getElementById('addButton') ; 
+addButton.addEventListener('click', saveFn); 
+
+let viewButton = document.getElementById('viewButton') ; 
+viewButton.addEventListener('click', viewFn); 
