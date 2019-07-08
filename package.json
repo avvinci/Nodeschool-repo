@@ -1,12 +1,12 @@
 {
-  "name": "elementry-electron",
+  "name": "elementry-quotes-electron",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "abhinav vinci",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.3.1",

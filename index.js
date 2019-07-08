@@ -24,6 +24,11 @@ function saveFn(){
 }
 
 function viewFn(){
+    let addBox = document.getElementById('addBox');
+    addBox.style.display = 'none';  
+    let box = document.createElement('div');
+    box.setAttribute('id' , 'viewBox') ; 
+    box.setAttribute('class', 'list-group') ;
 
     const csvFilePath='./quotes.csv'
     const csv=require('csvtojson')
@@ -31,8 +36,25 @@ function viewFn(){
     .fromFile(csvFilePath)
     .then((jsonObj)=>{
         console.log(jsonObj);
+        jsonObj.forEach( elem => {
+            var newlabel = document.createElement("Label");
+            newlabel.innerHTML =elem.QUOTE;
+            newlabel.setAttribute('class', 'list-group-item') ;
+            box.appendChild(newlabel);
+        })
     
     })
+    let addButton = document.createElement("Button");
+    addButton.innerHTML = "Add Quote" ; 
+    addButton.setAttribute('class' , 'btn btn-success btn-block mb-5 mt-5')
+    addButton.onclick =  () =>{
+        addBox.style.display = 'block';  
+        document.getElementById("viewBox").remove();
+    } 
+    box.appendChild(addButton) ;
+    
+    let bxc = document.getElementById('boxContainer');
+    bxc.appendChild(box) ; 
  
 }
 
