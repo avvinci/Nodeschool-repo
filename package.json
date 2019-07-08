@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cat-picture": "^5.1.2",
+    "csv-writer": "^1.4.0",
     "lightning-image-poly": "0.0.10"
   }
 }
