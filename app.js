@@ -5,13 +5,22 @@ electron.app.on('ready', function(){
         webPreferences: {
             nodeIntegration: true
         },
-        width:1000,
-        height:700})
+        width:800,
+        height:600})
     mainWindow.loadURL(`file://${__dirname}/index.html`)
+    
+    var mytrayWindow = new electron.BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
 
+    mytrayWindow.setMenu(null);
+    mytrayWindow.loadURL(`file://${__dirname}/tray.html`)
     trayWindow.setOptions({
         trayIconPath: "./Quotes.ico",
-        windowUrl: `file://${__dirname}/tray.html`
+        window: mytrayWindow,
+        // windowUrl: `file://${__dirname}/tray.html`,
       });
 
     trayWindow.setWindowSize({
