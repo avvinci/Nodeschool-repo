@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head> </head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
   <body>
-    <h5 text-center >Quote Collector</h5>
+    <h5 text-center>Quote Collector</h5>
 
-    <div id ="boxContainer"></div>
-    
-    <div id ="addBox">
-      <button  type="button" class="btn btn-success btn-block mb-5 mt-5 " id ="viewButton"> View Quotes </button>
+    <div id="boxContainer"></div>
+
+    <div id="addBox">
+      <button
+        type="button"
+        class="btn btn-outline-success btn-block mb-5 mt-5 "
+        id="viewButton"
+      >
+        View Quotes
+      </button>
       <div class="form-group">
-          Quote 
-            <div class="mb-3">
-              <textarea class="form-control" id="quoteTA" placeholder="Add Quote"  ></textarea>
-            </div>
-          Author 
-          <textarea  class="form-control" id="authorTA"> </textarea>
-          <button  type="button" class="btn btn-block btn-outline-primary mt-3" id ="addButton"> Add </button>
+        Quote
+        <div class="mb-3">
+          <textarea
+            class="form-control"
+            id="quoteTA"
+            placeholder="Add Quote"
+          ></textarea>
+        </div>
+        Author
+        <textarea class="form-control" id="authorTA"> </textarea>
+        <button
+          type="button"
+          class="btn btn-block btn-outline-primary mt-3"
+          id="addButton"
+        >
+          Add
+        </button>
       </div>
-  </div>
-    
+    </div>
+
     <script>
-        document.addEventListener("keydown", function (e) {
-          if (e.which === 116) {
-                location.reload();
-              }
-        });
-      </script>
+      document.addEventListener("keydown", function(e) {
+        if (e.which === 116) {
+          location.reload();
+        }
+      });
+    </script>
 
-    <script  src = "index.js"></script>
-
+    <script src="index.js"></script>
   </body>
 </html>
