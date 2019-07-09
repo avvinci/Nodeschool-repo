@@ -1,5 +1,5 @@
 var electron = require("electron");
-
+const BrowserWindow = electron.remote.BrowserWindow;
 var b = document.getElementById("viewMainWindow");
 
 b.onclick = () => {
@@ -7,7 +7,7 @@ b.onclick = () => {
 };
 
 function createMainWindow() {
-  var newWindow = new electron.BrowserWindow({
+  var newWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true
     },

@@ -1,14 +1,14 @@
 var electron = require("electron");
 const trayWindow = require("electron-tray-window");
 electron.app.on("ready", function() {
-  var mainWindow = new electron.BrowserWindow({
-    webPreferences: {
-      nodeIntegration: true
-    },
-    width: 800,
-    height: 600
-  });
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  // var mainWindow = new electron.BrowserWindow({
+  //   webPreferences: {
+  //     nodeIntegration: true
+  //   },
+  //   width: 800,
+  //   height: 600
+  // });
+  // mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   var mytrayWindow = new electron.BrowserWindow({
     webPreferences: {
