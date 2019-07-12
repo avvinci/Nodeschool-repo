@@ -13,7 +13,9 @@ electron.app.on("ready", function() {
   var mytrayWindow = new electron.BrowserWindow({
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    width: 100,
+    height: 100
   });
 
   // mytrayWindow.setMenu(null);

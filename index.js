@@ -1,12 +1,35 @@
+let quoteTA = document.getElementById("quoteTA");
+let authorTA = document.getElementById("authorTA");
+let addBox = document.getElementById("addBox");
+let viewButton = document.getElementById("viewButton");
+if (viewButton) viewButton.addEventListener("click", viewFn);
+let mainAddButton = document.getElementById("addButton");
+mainAddButton.addEventListener("click", saveFn);
+
+const csvFilePath = "./quotes.csv";
+
+function createViewBox() {
+  let box = document.createElement("div");
+  box.setAttribute("id", "viewBox");
+  box.setAttribute("class", "list-group");
+  let addButton = document.createElement("Button");
+  addButton.innerHTML = "Add Quote";
+  addButton.setAttribute("class", "btn btn-success btn-block mb-5 mt-5");
+  box.appendChild(addButton);
+  addButton.onclick = () => {
+    addBox.style.display = "block";
+    document.getElementById("viewBox").remove();
+  };
+
+  return box;
+}
+
 function saveFn() {
-  let quoteTA = document.getElementById("quoteTA");
-  let authorTA = document.getElementById("authorTA");
   let quote = quoteTA.value;
   let author = authorTA.value;
-
   console.log(quote);
   console.log(author);
-
+  const records = [{ quote, author }];
   const createCsvWriter = require("csv-writer").createObjectCsvWriter;
   const csvWriter = createCsvWriter({
     path: "quotes.csv",
@@ -16,9 +39,6 @@ function saveFn() {
     ],
     append: true
   });
-
-  const records = [{ quote, author }];
-
   csvWriter
     .writeRecords(records) // returns a promise
     .then(() => {
@@ -26,24 +46,12 @@ function saveFn() {
     });
 
   authorTA.value = "";
-  markDone();
   quoteTA.value = "";
 }
 
-function markDone() {
-  const notifier = require("node-notifier");
-  // String
-  notifier.notify("Quotes Added");
-}
-
 function viewFn() {
-  let addBox = document.getElementById("addBox");
   addBox.style.display = "none";
-  let box = document.createElement("div");
-  box.setAttribute("id", "viewBox");
-  box.setAttribute("class", "list-group");
-
-  const csvFilePath = "./quotes.csv";
+  let box = createViewBox();
   const csv = require("csvtojson");
   csv()
     .fromFile(csvFilePath)
@@ -56,21 +64,6 @@ function viewFn() {
         box.appendChild(newlabel);
       });
     });
-  let addButton = document.createElement("Button");
-  addButton.innerHTML = "Add Quote";
-  addButton.setAttribute("class", "btn btn-success btn-block mb-5 mt-5");
-  addButton.onclick = () => {
-    addBox.style.display = "block";
-    document.getElementById("viewBox").remove();
-  };
-  box.appendChild(addButton);
-
   let bxc = document.getElementById("boxContainer");
   bxc.appendChild(box);
 }
-
-let addButton = document.getElementById("addButton");
-addButton.addEventListener("click", saveFn);
-
-let viewButton = document.getElementById("viewButton");
-viewButton.addEventListener("click", viewFn);
