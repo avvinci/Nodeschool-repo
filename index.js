@@ -1,3 +1,5 @@
+const { ipcRenderer } = require("electron");
+
 function getElem(id) {
   return document.getElementById(id);
 }
@@ -10,6 +12,10 @@ let mainAddButton = getElem("addButton");
 mainAddButton.addEventListener("click", saveFn);
 
 if (viewButton) viewButton.addEventListener("click", viewFn);
+
+window.onload = function() {
+  document.getElementById("loading").style.display = "none";
+};
 
 const csvFilePath = "./quotes.csv";
 
@@ -37,22 +43,11 @@ function saveFn() {
   let author = authorTA.value;
   console.log(quote);
   console.log(author);
-  const records = [{ quote, author }];
-  const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-  const csvWriter = createCsvWriter({
-    path: "quotes.csv",
-    header: [
-      { id: "quote", title: "QUOTE" },
-      { id: "author", title: "AUTHOR" }
-    ],
-    append: true
-  });
-  csvWriter
-    .writeRecords(records) // returns a promise
-    .then(() => {
-      console.log("...Done");
-    });
-
+  let inputData = {
+    author: author,
+    quote: quote
+  };
+  ipcRenderer.send("inputData", inputData);
   authorTA.value = "";
   quoteTA.value = "";
 }
