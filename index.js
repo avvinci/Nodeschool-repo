@@ -1,10 +1,15 @@
-let quoteTA = document.getElementById("quoteTA");
-let authorTA = document.getElementById("authorTA");
-let addBox = document.getElementById("addBox");
-let viewButton = document.getElementById("viewButton");
-if (viewButton) viewButton.addEventListener("click", viewFn);
-let mainAddButton = document.getElementById("addButton");
+function getElem(id) {
+  return document.getElementById(id);
+}
+
+let quoteTA = getElem("quoteTA");
+let authorTA = getElem("authorTA");
+let addBox = getElem("addBox");
+let viewButton = getElem("viewButton");
+let mainAddButton = getElem("addButton");
 mainAddButton.addEventListener("click", saveFn);
+
+if (viewButton) viewButton.addEventListener("click", viewFn);
 
 const csvFilePath = "./quotes.csv";
 
@@ -13,12 +18,15 @@ function createViewBox() {
   box.setAttribute("id", "viewBox");
   box.setAttribute("class", "list-group");
   let addButton = document.createElement("Button");
-  addButton.innerHTML = "Add Quote";
+  addButton.innerHTML = "Submit New Quote";
   addButton.setAttribute("class", "btn btn-success btn-block mb-5 mt-5");
+  addButton.style.width = "60%";
+  addButton.style.marginLeft = "20%";
+
   box.appendChild(addButton);
   addButton.onclick = () => {
     addBox.style.display = "block";
-    document.getElementById("viewBox").remove();
+    getElem("viewBox").remove();
   };
 
   return box;
@@ -60,10 +68,13 @@ function viewFn() {
       jsonObj.forEach(elem => {
         var newlabel = document.createElement("Label");
         newlabel.innerHTML = elem.QUOTE;
+        newlabel.style.width = "80%";
+        newlabel.style.marginLeft = "10%";
+
         newlabel.setAttribute("class", "list-group-item");
         box.appendChild(newlabel);
       });
     });
-  let bxc = document.getElementById("boxContainer");
+  let bxc = getElem("boxContainer");
   bxc.appendChild(box);
 }

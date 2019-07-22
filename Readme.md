@@ -12,4 +12,8 @@
 2. Add tray input
 3. add toast
 4. Improve design
-999. Everything! 
+5. Fix build issues
+6. Refactor code
+7. Add react framework
+8. Add pagination
+9. Everything!
