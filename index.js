@@ -17,8 +17,6 @@ window.onload = function() {
   document.getElementById("loading").style.display = "none";
 };
 
-const csvFilePath = "./quotes.csv";
-
 function createViewBox() {
   let box = document.createElement("div");
   box.setAttribute("id", "viewBox");
@@ -39,14 +37,11 @@ function createViewBox() {
 }
 
 function saveFn() {
-  let quote = quoteTA.value;
-  let author = authorTA.value;
-  console.log(quote);
-  console.log(author);
   let inputData = {
-    author: author,
-    quote: quote
+    author: authorTA.value,
+    quote: quoteTA.value
   };
+  console.log(inputData);
   ipcRenderer.send("inputData", inputData);
   authorTA.value = "";
   quoteTA.value = "";
@@ -55,21 +50,19 @@ function saveFn() {
 function viewFn() {
   addBox.style.display = "none";
   let box = createViewBox();
-  const csv = require("csvtojson");
-  csv()
-    .fromFile(csvFilePath)
-    .then(jsonObj => {
-      console.log(jsonObj);
-      jsonObj.forEach(elem => {
-        var newlabel = document.createElement("Label");
-        newlabel.innerHTML = elem.QUOTE;
-        newlabel.style.width = "80%";
-        newlabel.style.marginLeft = "10%";
+  ipcRenderer.send("needViewData", null);
 
-        newlabel.setAttribute("class", "list-group-item");
-        box.appendChild(newlabel);
-      });
+  ipcRenderer.on("viewData", (event, jsonObj) => {
+    jsonObj.forEach(elem => {
+      var newlabel = document.createElement("Label");
+      newlabel.innerHTML = elem.QUOTE;
+      newlabel.style.width = "80%";
+      newlabel.style.marginLeft = "10%";
+
+      newlabel.setAttribute("class", "list-group-item");
+      box.appendChild(newlabel);
     });
+  });
   let bxc = getElem("boxContainer");
   bxc.appendChild(box);
 }

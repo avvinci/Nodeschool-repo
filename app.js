@@ -1,6 +1,7 @@
 var electron = require("electron");
 const trayWindow = require("electron-tray-window");
 const { ipcMain } = require("electron");
+const csvFilePath = "./quotes.csv";
 
 electron.app.on("ready", function() {
   var mytrayWindow = new electron.BrowserWindow({
@@ -27,8 +28,18 @@ electron.app.on("ready", function() {
   });
 });
 
+ipcMain.on("needViewData", async event => {
+  const csv = require("csvtojson");
+  csv()
+    .fromFile(csvFilePath)
+    .then(jsonObj => {
+      // console.log(jsonObj);
+      event.reply("viewData", jsonObj);
+    });
+});
+
 ipcMain.on("inputData", async (event, inputData) => {
-  console.log(inputData);
+  // console.log(inputData);
   let quote = inputData.quote;
   let author = inputData.author;
   const records = [{ quote, author }];
