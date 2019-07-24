@@ -8,7 +8,10 @@ function createViewBox() {
   box.setAttribute("class", "list-group");
   let addButton = document.createElement("Button");
   addButton.innerHTML = "Submit New Quote";
-  addButton.setAttribute("class", "btn btn-success btn-block mb-5 mt-5");
+  addButton.setAttribute(
+    "class",
+    "btn btn-outline-success btn-block mb-5 mt-5"
+  );
   addButton.style.width = "60%";
   addButton.style.marginLeft = "20%";
 

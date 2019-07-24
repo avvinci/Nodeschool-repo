@@ -71,8 +71,8 @@ function createTrayWindow() {
     webPreferences: {
       nodeIntegration: true
     },
-    width: 400,
-    height: 400,
+    width: 700,
+    height: 500,
     margin_x: 10,
     margin_y: 10
   });

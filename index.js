@@ -9,6 +9,13 @@ let authorTA = getElem("authorTA");
 let mainAddButton = getElem("addButton");
 mainAddButton.addEventListener("click", saveFn);
 
+var heightLimit = 1000; /* Maximum height: 200px */
+
+quoteTA.oninput = function() {
+  quoteTA.style.height = ""; /* Reset the height*/
+  quoteTA.style.height = Math.min(textarea.scrollHeight, heightLimit) + "px";
+};
+
 // window.onload = function() {
 //   document.getElementById("loading").style.display = "none";
 // };
