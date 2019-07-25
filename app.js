@@ -1,9 +1,23 @@
-const { BrowserWindow, app, Menu, Tray, ipcMain } = require("electron");
+const {
+  BrowserWindow,
+  app,
+  Menu,
+  Tray,
+  ipcMain,
+  globalShortcut
+} = require("electron");
+
 // const trayWindow = require("electron-tray-window");
 const csvFilePath = "./quotes.csv";
 
-let tray = null;
+let tray = null,
+  mytrayWindow = null;
 app.on("ready", () => {
+  globalShortcut.register("CommandOrControl+Y", () => {
+    console.log(`The global shortkey was pressed!`);
+    createTrayWindow();
+  });
+
   tray = new Tray("./Quotes.ico");
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -13,8 +27,7 @@ app.on("ready", () => {
       }
     },
     { label: "ViewQuotes" },
-    { label: "Settings" },
-    { label: "Misc" }
+    { label: "Settings" }
   ]);
   tray.setToolTip("Quotes collector.");
   tray.setContextMenu(contextMenu);
@@ -67,7 +80,8 @@ function createMainWindow() {
 }
 
 function createTrayWindow() {
-  var mytrayWindow = new BrowserWindow({
+  if (mytrayWindow) return;
+  mytrayWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true
     },
@@ -78,9 +92,12 @@ function createTrayWindow() {
   });
   mytrayWindow.setMenu(null);
   mytrayWindow.loadURL(`file://${__dirname}/index.html`);
-  // trayWindow.setOptions({
-  // trayIconPath: "./Quotes.ico",
-  //   window: mytrayWindow
-  //   // windowUrl: `file://${__dirname}/tray.html`,
-  // });
 }
+
+app.on("will-quit", () => {
+  // Unregister a shortcut.
+  globalShortcut.unregister("CommandOrControl+Y");
+
+  // Unregister all shortcuts.
+  globalShortcut.unregisterAll();
+});
